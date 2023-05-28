@@ -1,22 +1,24 @@
 #!/usr/bin/python3
+from inspect import stack
 from scapy.all import IP, TCP, Ether, raw
+from utils.packet_print import print_packet
 
 #a standalone TCP protocol packet
 tcp = TCP()
 print("standalone TCP packet - ")
-print(repr(TCP(raw(tcp))))
+print_packet(tcp, verbose = True)
 print()
 
 #a standalone IP protocol packet
 ip = IP()
 print("standalone IP packet - ")
-print(repr(IP(raw(ip))))
+print_packet(ip, verbose=True)
 print()
 
 #a standalone Ether packet
 ether = Ether()
 print("standalone Ethernet packet - ")
-print(repr(Ether(raw(ether))))
+print_packet(ether, verbose=True)
 print()
 
 #stacked packet
@@ -24,4 +26,4 @@ print()
 #corresponding values in standalone packets
 stacked = ether / ip / tcp
 print("stacked packet - ")
-print(repr(Ether(raw(stacked))))
+print_packet(stacked, verbose=True)
